@@ -1,9 +1,10 @@
 //hold reducer, action types, action creators, and reducer's innitial state
 
 
-//this is an action type; a description of what happened; used by reducer below
+//place for all action types; a description of what happened; used by reducer below
 //to determine how to changes state.
 const CREATE_CHART = 'CREATE_CHART'
+const SET_ACTIVE_CHART_INDEX = 'SET_ACTIVE_CHART_INDEX'
 
 const initialState = {
   activeChartIndex:0,
@@ -36,17 +37,29 @@ export default function chart(state = initialState,action){
         charts:[action.chart,...state.charts],
         activeChartIndex:0
       }
+    case SET_ACTIVE_CHART_INDEX:
+      return{
+        charts:state.charts,
+        activeChartIndex:action.index
+      }
     default: return state
   }
 }
 
 export function createChart(labels,name){
   return{
+    type:CREATE_CHART,
     chart:{
       labels,
       name,
       datasets:[]
-    },
-    type:CREATE_CHART
+    }
+  }
+}
+
+export function setActiveChartIndex(index){
+  return {
+    type:SET_ACTIVE_CHART_INDEX,
+    index:index
   }
 }
