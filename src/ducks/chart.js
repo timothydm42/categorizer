@@ -5,6 +5,7 @@
 //to determine how to changes state.
 const CREATE_CHART = 'CREATE_CHART'
 const SET_ACTIVE_CHART_INDEX = 'SET_ACTIVE_CHART_INDEX'
+const ADD_DATASET = 'ADD_DATASET'
 
 const initialState = {
   activeChartIndex:0,
@@ -42,6 +43,22 @@ export default function chart(state = initialState,action){
         charts:state.charts,
         activeChartIndex:action.index
       }
+    case ADD_DATASET:{
+      const {activeChartIndex, charts} = state
+      const activeChart = charts[activeChartIndex]
+      return {
+        activeChartIndex,
+        charts: [
+          ...charts.slice(0,activeChartIndex),
+          Object.assign(
+            {},
+            activeChart,
+            {datasets: [...activeChart.datasets, action.dataset]}
+          ),
+          ...charts.slice(activeChartIndex + 1, charts.length)
+        ]
+      }
+    }
     default: return state
   }
 }
@@ -60,6 +77,13 @@ export function createChart(labels,name){
 export function setActiveChartIndex(index){
   return {
     type:SET_ACTIVE_CHART_INDEX,
-    index:index
+    index
+  }
+}
+
+export function addDataset(dataset){
+  return {
+    type:ADD_DATASET,
+    dataset
   }
 }
