@@ -21,11 +21,11 @@ const initialState = {
   			  label: "My First dataset"
   			  // Each of these numbers corresponds to one of the labels above,
   			  // based on index
-  			, data: [65, 59, 90, 81, 56, 55, 40]
+  			, data: [59, 90, 81, 56, 55, 40]
   		}
   		, {
   			  label: "My Second dataset"
-  			, data: [28, 48, 40, 19, 96, 27, 100]
+  			, data: [48, 40, 19, 96, 27, 100]
   		}
   	]
   }]

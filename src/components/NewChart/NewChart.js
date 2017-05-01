@@ -30,7 +30,9 @@ export default class NewChart extends Component {
 	}
 	submitChart(){
 		const {labels,name} = this.state
+
 		if (!name || labels.length < 3) return
+		console.log("here")
 		this.props.createChart(labels,name)
 		this.setState({
 			labels:[],
